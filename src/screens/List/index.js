@@ -11,7 +11,13 @@ import { Tabs } from '../../components/Tabs/Tabs.js';
 import { Content } from '../../components/Content/Content.js';
 
 export function List() {
-   // const {register, handleSubmit} = useForm();
+   useEffect(() => {
+      async function fetchList() {
+         const { data } = await api.get('https://api.spotify.com/v1/artists');
+         const {} = data;
+      }
+   });
+
    return (
       <SafeAreaView>
          <Container>
