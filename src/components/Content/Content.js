@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
-import { Text, FlatList } from 'react-native';
+import React from 'react';
+import {
+   FlatList,
+   SafeAreaView,
+   ScrollView,
+   View,
+   VirtualizedList,
+} from 'react-native';
 
 import { RectButton } from 'react-native-gesture-handler';
 
-import { Container, List, Name, Title, Image } from './styles';
+import { Container, List, Name, Image, Title } from './styles';
 
 import profile from '../../Image/alison.png';
 import newsletter from '../../Image/newsletter-tron.png';
 import sorted from '../../Image/plantsSorted.png';
 import tela from '../../Image/tela.png';
-
-import CardList from '../Card/CardList';
+import coursera from '../../Image/coursera.png';
+import conta5 from '../../Image/conta5.png';
+import indexImg from '../../Image/index.tsx.png';
 
 export function Content() {
    const images = [
@@ -18,14 +25,17 @@ export function Content() {
       { id: 2, new: newsletter, title: 'Letíca Lopes' },
       { id: 3, Sort: sorted, title: 'Davi Marques' },
       { id: 4, TL: tela, title: 'Jefferson Marques' },
+      { id: 5, Coursera: coursera, title: 'Claudio Marques' },
+      { id: 6, TL3: conta5, title: 'Leia Tucunduva' },
+      { id: 7, TL4: indexImg, title: 'Nick Marques' },
    ];
 
    return (
       <Container>
          <List>
             <FlatList
-               showsHorizontalScrollIndicator={true}
                data={images}
+               onEndReachedThreshold={0.1}
                keyExtractor={item => String(item.id)}
                renderItem={({ item }) => (
                   <RectButton
