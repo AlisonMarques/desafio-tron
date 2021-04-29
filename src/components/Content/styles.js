@@ -6,7 +6,7 @@ export const Container = styled.View`
    align-items: flex-start;
    padding: 0px;
 
-   position: absolute;
+   position: relative;
    width: 379px;
    height: 544px;
    left: 16px;
@@ -17,8 +17,6 @@ export const List = styled.View`
    display: flex;
    flex-direction: row;
    padding: 0px;
-
-   position: absolute;
    width: 379px;
    left: 0px;
    top: 0px;

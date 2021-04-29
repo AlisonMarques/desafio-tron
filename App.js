@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { List } from './src/screens/List';
+import Routes from './src/routes';
 
 export default function App() {
-   return <List />;
+   return <Routes />;
 }
