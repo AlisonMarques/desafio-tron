@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-   FlatList,
-   SafeAreaView,
-   ScrollView,
-   View,
-   VirtualizedList,
-} from 'react-native';
+import { FlatList } from 'react-native';
 
 import { RectButton } from 'react-native-gesture-handler';
 
@@ -35,7 +29,7 @@ export function Content() {
          <List>
             <FlatList
                data={images}
-               onEndReachedThreshold={0.1}
+               onEndReachedThreshold={0.7}
                keyExtractor={item => String(item.id)}
                renderItem={({ item }) => (
                   <RectButton
