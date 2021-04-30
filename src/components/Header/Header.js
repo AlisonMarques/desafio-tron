@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container, Title } from './styles';
 
-export function Header() {
+export function Header({ title }) {
    return (
       <Container>
-         <Title>Música</Title>
+         <Title>{title}</Title>
       </Container>
    );
 }

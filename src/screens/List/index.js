@@ -20,7 +20,7 @@ export function List() {
 
    return (
       <Container>
-         <Header />
+         <Header title="Música" />
          <Tabs />
          <Content />
       </Container>
