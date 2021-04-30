@@ -1,0 +1,4 @@
+- A lógica da tela Details é: Quando o usuário clicar no item da Flatlist 
+se direcionar para a tela de detalhes. 
+
+- Na tela de detalhes vai receber o name e a image e acrescentar os detalhes do artista

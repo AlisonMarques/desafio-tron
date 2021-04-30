@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 
 export function Details() {
    return (
-      <View>
+      <View style={{ backgroundColor: '#fff' }}>
          <Text>Teste Details</Text>
       </View>
    );

@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import AuthRoutes from './tab.routes';
 import { Search } from '../screens/Search';
+import { Details } from '../screens/Details';
 
 const stackRoutes = createStackNavigator();
 
@@ -13,14 +14,14 @@ export default function AppRoutes() {
          headerMode="none"
          screenOptions={{
             cardStyle: {
-               backgroundColor: '#222',
+               backgroundColor: '#121212',
             },
          }}>
          <stackRoutes.Screen name="List" component={AuthRoutes} />
 
-         <stackRoutes.Screen name="Search" component={Search} />
+         <stackRoutes.Screen name="Search" component={AuthRoutes} />
 
-         <stackRoutes.Screen name="Details" component={AuthRoutes} />
+         <stackRoutes.Screen name="Details" component={Details} />
       </stackRoutes.Navigator>
    );
 }
