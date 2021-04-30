@@ -45,7 +45,7 @@ export default function AuthRoutes() {
                ),
             }}
          />
-         <AppTab.Screen
+         {/* <AppTab.Screen
             name="Details"
             component={Details}
             options={{
@@ -53,7 +53,7 @@ export default function AuthRoutes() {
                   <Icon name="search" size={25} color={'#fff'} />
                ),
             }}
-         />
+         /> */}
       </AppTab.Navigator>
    );
 }
