@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-   position: relative;
+   flex: 1;
+   position: absolute;
    width: 240px;
    left: 16px;
    top: 32px;
