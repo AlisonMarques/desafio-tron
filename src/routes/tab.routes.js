@@ -19,6 +19,8 @@ export default function AuthRoutes() {
             labelPosition: 'below-icon',
             labelStyle: { fontSize: 12, marginBottom: 5 },
             style: {
+               flex: 1,
+               position: 'absolute',
                height: 56,
                backgroundColor: '#222',
             },

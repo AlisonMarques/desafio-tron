@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { View, Text } from 'react-native';
-
+import { Container } from './styles';
+import { Header } from '../../components/Header/Header';
+import { Content } from '../../components/Content/Content';
 export function Details() {
    return (
-      <View style={{ backgroundColor: '#fff' }}>
-         <Text>Teste Details</Text>
-      </View>
+      <Container>
+         <Content />
+      </Container>
    );
 }

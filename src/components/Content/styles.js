@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
+   flex: 1;
    position: relative;
    width: 379px;
    height: 544px;
@@ -9,9 +10,8 @@ export const Container = styled.View`
 `;
 
 export const List = styled.View`
+   flex: 1;
    position: relative;
-
-   flex-direction: row;
    padding: 0px;
    width: 379px;
    left: 0px;
@@ -32,7 +32,6 @@ export const List = styled.View`
 // `;
 
 export const Name = styled.Text`
-   width: 299px;
    left: 0px;
    top: 0px;
    padding: 20px;

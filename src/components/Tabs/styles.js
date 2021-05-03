@@ -1,13 +1,16 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-   position: relative;
+   flex: 1;
+
+   position: absolute;
    width: 246px;
    left: 16px;
    top: 94px;
 `;
 
 export const ButtonTitle = styled.TouchableOpacity`
+   flex: 1;
    position: absolute;
    display: flex;
 `;
