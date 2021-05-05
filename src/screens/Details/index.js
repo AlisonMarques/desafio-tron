@@ -7,7 +7,7 @@ import { Content } from '../../components/Content/Content';
 export function Details() {
    return (
       <Container>
-         <Content />
+         <Header title="Details" />
       </Container>
    );
 }

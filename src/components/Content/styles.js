@@ -2,20 +2,21 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
    flex: 1;
+   display: flex;
    position: relative;
-   width: 379px;
-   height: 544px;
+   width: 100%;
+   height: 100%;
    left: 16px;
    top: 132px;
 `;
 
 export const List = styled.View`
    flex: 1;
+   display: flex;
+   justify-content: space-between;
+
    position: relative;
-   padding: 0px;
-   width: 379px;
-   left: 0px;
-   top: 0px;
+   width: 100%;
 `;
 
 // export const List = styled.FlatList`
@@ -32,14 +33,13 @@ export const List = styled.View`
 // `;
 
 export const Name = styled.Text`
-   left: 0px;
-   top: 0px;
    padding: 20px;
    color: #ffffff;
    font-size: 16px;
    font-style: normal;
    font-weight: bold;
    display: flex;
+
    align-items: center;
    line-height: 20px;
    text-align: left;

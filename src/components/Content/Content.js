@@ -43,7 +43,6 @@ export function Content() {
                   data={images}
                   onEndReachedThreshold={0.7}
                   showsVerticalScrollIndicator={false}
-                  contentContainerStyle={{}}
                   keyExtractor={item => String(item.id)}
                   renderItem={({ item }) => (
                      <RectButton
