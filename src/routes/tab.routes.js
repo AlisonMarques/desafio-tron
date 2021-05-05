@@ -20,6 +20,7 @@ export default function AuthRoutes() {
             labelStyle: { fontSize: 12, marginBottom: 5 },
             style: {
                flex: 1,
+               display: 'flex',
                position: 'absolute',
                height: 56,
                backgroundColor: '#222',
