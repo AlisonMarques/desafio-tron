@@ -18,16 +18,35 @@ class Authentication {
          serviceConfiguration: {
             authorizationEndpoint: 'https://accounts.spotify.com/authorize',
             tokenEndpoint: 'https://accounts.spotify.com/api/token',
-            artistsEndpoint: 'https://api.spotify.com/v1/artists/',
          },
       };
    }
 
    async onLogin() {
       try {
-         const result = await authorize(this.spotifyAuthConfig);
-         alert(JSON.stringify(result));
-         return result;
+         const { accessToken } = await authorize(this.spotifyAuthConfig);
+         const endpoint = 'https://api.spotify.com/v1/artists';
+         const artists =
+            '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6,0oSGxfWSnnOXhD2fKuz2Gy,3dBVyJ7JuOMt4GE9607Qin';
+
+         fetch(`${endpoint}?ids=${artists}`, {
+            method: 'GET',
+            headers: {
+               Authorization: `Bearer ${accessToken}`,
+            },
+         })
+            .then(response => response.json())
+            .then(({ artists }) => {
+               artists.map(item => {
+                  console.log({ ...item });
+               });
+            });
+         // .then(({ artists }) => {
+         //    artists.forEach(item => {
+         //       console.log(`${item.id} ${item.name}`);
+         //    });
+         // });
+         //  return response;
       } catch (error) {
          console.log(JSON.stringify(error));
       }
@@ -39,6 +58,12 @@ class Authentication {
       });
 
       return result;
+   }
+
+   async getArtists() {
+      const { data } = await api.get('https://api.spotify.com/v1/artists');
+      console.log(data);
+      return data;
    }
 }
 
