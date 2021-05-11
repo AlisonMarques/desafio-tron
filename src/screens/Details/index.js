@@ -8,6 +8,7 @@ export function Details() {
    return (
       <Container>
          <Header title="Details" />
+         <Text style={{ color: '#fff' }}>teste</Text>
       </Container>
    );
 }

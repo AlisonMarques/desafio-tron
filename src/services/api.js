@@ -1,7 +1,11 @@
 import axios from 'axios';
 
 const api = axios.create({
-   baseURL: 'com.desafiotron:/oauthredirect',
+   baseURL: 'https://api.spotify.com/v1/',
+   // headers: {
+   //    ' Accept': 'application/json',
+   //    ' Content-Type': 'application/json',
+   // },
 });
 
 export default api;

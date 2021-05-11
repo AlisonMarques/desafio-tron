@@ -2,7 +2,6 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
    flex: 1;
-
    position: absolute;
    width: 246px;
    left: 16px;
@@ -30,8 +29,6 @@ export const Activity = styled.ActivityIndicator`
    right: 1%;
    top: 93.33%;
    bottom: 0%;
-
    /* Main */
-
    background: #1db954;
 `;
