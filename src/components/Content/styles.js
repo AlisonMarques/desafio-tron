@@ -1,35 +1,20 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-   flex: 1;
-   display: flex;
-   position: relative;
-   width: 100%;
-   height: 100%;
-   left: 16px;
-   top: 132px;
-`;
-
-export const List = styled.View`
-   flex: 1;
-   display: flex;
-   justify-content: space-between;
-
-   position: relative;
-   width: 100%;
-`;
-
-// export const List = styled.FlatList`
-//    flex: 1;
+// export const Container = styled.View`
+//    position: relative;
+//    width: 100%;
+//    height: 100%;
+//    left: 16px;
+//    top: 132px;
 // `;
 
-// export const Title = styled.View`
-//    font-style: normal;
-//    font-weight: bold;
-//    font-size: 16px;
-//    line-height: 20px;
+// export const List = styled.View`
+//    flex: 1;
 //    display: flex;
-//    align-items: center;
+//    justify-content: space-between;
+
+//    position: relative;
+//    width: 100%;
 // `;
 
 export const Name = styled.Text`

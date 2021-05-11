@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Searchbar } from 'react-native-paper';
 
-import { KeyboardAvoidingView } from 'react-native';
-
 import { Container } from './styles';
 
 export function SearchBar({ onChangeText, value }) {

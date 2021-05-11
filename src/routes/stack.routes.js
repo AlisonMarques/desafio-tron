@@ -24,11 +24,7 @@ export default function AppRoutes() {
 
          <stackRoutes.Screen name="Search" component={AuthRoutes} />
 
-         <stackRoutes.Screen
-            name="Details"
-            component={Details}
-            options={{ title: 'Artists' }}
-         />
+         <stackRoutes.Screen name="Details" component={Details} />
       </stackRoutes.Navigator>
    );
 }

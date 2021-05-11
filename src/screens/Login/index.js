@@ -6,7 +6,9 @@ const AUTH_URL =
 //Linking.openURL(AUTH_URL)
 
 import authHandler from '../../utils/authentication';
-
+// console.tron.log('teste');
+// console.tron.log('teste2');
+// console.tron.log('teste23');
 export function Login() {
    return (
       <View
