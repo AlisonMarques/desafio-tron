@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Searchbar } from 'react-native-paper';
 
-import { Container } from './styles';
+import { Container, ContentList } from './styles';
 
 export function SearchBar({ onChangeText, value }) {
    return (

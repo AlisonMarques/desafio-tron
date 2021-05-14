@@ -1,11 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { List } from '../screens/List';
+import List from '../screens/List';
+import Search from '../screens/Search';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Search } from '../screens/Search';
+import Login from '../screens/Login';
 
 const AppTab = createBottomTabNavigator();
 
@@ -18,13 +19,20 @@ export default function AuthRoutes() {
             labelPosition: 'below-icon',
             labelStyle: { fontSize: 12, marginBottom: 5 },
             style: {
-               flex: 1,
-               display: 'flex',
-               position: 'absolute',
                height: 56,
                backgroundColor: '#222',
             },
          }}>
+         <AppTab.Screen
+            name="Login"
+            component={Login}
+            options={{
+               tabBarIcon: () => (
+                  <MaterialIcons name="login" size={25} color={'#fff'} />
+               ),
+            }}
+         />
+
          <AppTab.Screen
             name="List"
             component={List}
@@ -47,15 +55,6 @@ export default function AuthRoutes() {
                ),
             }}
          />
-         {/* <AppTab.Screen
-            name="Details"
-            component={Details}
-            options={{
-               tabBarIcon: () => (
-                  <Icon name="search" size={25} color={'#fff'} />
-               ),
-            }}
-         /> */}
       </AppTab.Navigator>
    );
 }
