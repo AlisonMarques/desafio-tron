@@ -1,19 +1,22 @@
 import React from 'react';
+import { View } from 'react-native';
 
 import { RectButton } from 'react-native-gesture-handler';
 
-import { Name, Image } from './styles';
+import { Container, Name, ImageArtist } from './styles';
 
-export function Content({ image, name, ...rest }) {
+export function Content({ item, ...rest }) {
    return (
-      <RectButton
-         style={{
-            flexDirection: 'row',
-            marginBottom: 5,
-         }}
-         {...rest}>
-         <Image source={image} />
-         <Name>{name}</Name>
-      </RectButton>
+      <Container>
+         <RectButton
+            style={{
+               flexDirection: 'row',
+               marginBottom: 5,
+            }}
+            {...rest}>
+            <ImageArtist source={{ uri: item.images[0].url }} />
+            <Name>{item.name}</Name>
+         </RectButton>
+      </Container>
    );
 }

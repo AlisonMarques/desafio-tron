@@ -1,12 +1,10 @@
 import styled from 'styled-components/native';
 
-// export const Container = styled.View`
-//    position: relative;
-//    width: 100%;
-//    height: 100%;
-//    left: 16px;
-//    top: 132px;
-// `;
+export const Container = styled.View`
+   flex: 1;
+   margin: 8px;
+   padding-top: 8px;
+`;
 
 // export const List = styled.View`
 //    flex: 1;
@@ -30,7 +28,7 @@ export const Name = styled.Text`
    text-align: left;
 `;
 
-export const Image = styled.Image`
+export const ImageArtist = styled.Image`
    width: 64px;
    height: 64px;
    margin-bottom: 20px;

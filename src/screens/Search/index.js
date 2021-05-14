@@ -1,27 +1,87 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import {
-   KeyboardAvoidingView,
-   TouchableWithoutFeedback,
-   Keyboard,
-   Platform,
-   View,
-   SafeAreaView,
-} from 'react-native';
+import { View, FlatList, ActivityIndicator } from 'react-native';
+
+import api from '../../services/api';
+import { useNavigation } from '@react-navigation/core';
+
+import { Container, ContentList } from './styles';
 
 import { Header } from '../../components/Header/Header';
-import { Container, Containerr } from './styles';
 import { Tabs } from '../../components/Tabs/Tabs.js';
 import { SearchBar } from '../../components/SearchBar';
 import { Content } from '../../components/Content/Content';
 
-export function Search() {
+export default function Search({ route }) {
+   const accessToken = route.params;
+
+   const [getArtists, setGetArtists] = useState([]);
+   const [isLoading, setIsLoading] = useState(true);
+
+   const navigation = useNavigation();
+
+   function handleArtistSelected() {
+      navigation.navigate('Details', { getArtists });
+   }
+
+   const ids =
+      '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6,0oSGxfWSnnOXhD2fKuz2Gy,3dBVyJ7JuOMt4GE9607Qin';
+
+   useEffect(() => {
+      setIsLoading(true);
+
+      getArtistsFromAPi();
+   }, []);
+
+   function getArtistsFromAPi() {
+      api.get(`artists?ids=${ids}`, {
+         headers: { Authorization: `Bearer ${accessToken}` },
+      })
+         .then(async function (response) {
+            setGetArtists(response.data);
+            setIsLoading(false);
+
+            console.tron.log(getArtists);
+         })
+         .catch(function (error) {
+            console.log(error);
+         });
+   }
+
+   if (!getArtists) {
+      return null;
+   }
+
+   if (isLoading) {
+      return (
+         <View
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator size="large" color="#5500dc" />
+         </View>
+      );
+   }
+
    return (
       <Container>
          <Header title="Música" />
          <Tabs />
          <SearchBar />
-         <Content />
+         <ContentList>
+            <View>
+               <FlatList
+                  data={getArtists.artists}
+                  showsVerticalScrollIndicator={false}
+                  keyExtractor={(item, index) => 'key' + index}
+                  contentContainerStyle={{ justifyContent: 'space-between' }}
+                  renderItem={({ item }) => (
+                     <Content
+                        item={item}
+                        onPress={() => handleArtistSelected(item)}
+                     />
+                  )}
+               />
+            </View>
+         </ContentList>
       </Container>
    );
 }
