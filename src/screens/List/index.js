@@ -7,16 +7,21 @@ import { Container, Lista, ContentList } from './styles';
 import { Tabs } from '../../components/Tabs/Tabs.js';
 import { Content } from '../../components/Content/Content.js';
 
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 
 import api from '../../services/api';
 
-export default function List({ route }) {
+export default function List() {
    const [getArtists, setGetArtists] = useState([]);
    const [isLoading, setIsLoading] = useState(true);
+   const [selectedId, setSelectedId] = useState(null);
+
    const navigation = useNavigation();
 
-   const accessToken = route.params;
+   const route = useRoute();
+
+   const { accessToken } = route.params;
+   console.tron.log(accessToken);
 
    function handleArtistSelected() {
       navigation.navigate('Details', { getArtists });
@@ -30,12 +35,13 @@ export default function List({ route }) {
       getArtistsFromAPi();
    }, []);
 
-   function getArtistsFromAPi() {
-      api.get(`artists?ids=${ids}`, {
-         headers: {
-            headers: { Authorization: `Bearer ${accessToken}` },
-         },
-      })
+   async function getArtistsFromAPi() {
+      await api
+         .get(`artists?ids=${ids}`, {
+            headers: {
+               Authorization: `Bearer ${accessToken}`,
+            },
+         })
          .then(async function (response) {
             setGetArtists(response.data);
             setIsLoading(false);
@@ -73,7 +79,8 @@ export default function List({ route }) {
                      data={getArtists.artists}
                      styles={{ flex: 1, backgroundColor: 'red' }}
                      showsVerticalScrollIndicator={false}
-                     keyExtractor={(item, index) => 'key' + index}
+                     keyExtractor={(item, index) => item.id}
+                     key={item => item.id}
                      renderItem={({ item }) => (
                         <Content
                            item={item}

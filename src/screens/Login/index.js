@@ -4,9 +4,9 @@ import { authorize, refresh } from 'react-native-app-auth';
 import { View, TouchableOpacity, Text, Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 
-export default function Login({ navigation }) {
+export default function Login() {
    const [accessToken, setAcessToken] = useState('');
-
+   const navigation = useNavigation();
    useEffect(() => {
       onLogin();
    }, []);
@@ -30,12 +30,12 @@ export default function Login({ navigation }) {
          },
       };
       try {
-         const results = await authorize(spotifyAuthConfig);
+         const accessToken = await authorize(spotifyAuthConfig);
+         // console.tron.log(accessToken);
+         navigation.navigate('List', { accessToken: accessToken.accessToken });
 
-         console.tron.log(accessToken);
-         setAcessToken(results.accessToken);
-         navigation.navigate('List', accessToken);
-         return results;
+         setAcessToken(accessToken.accessToken);
+         // return accessToken;
       } catch (error) {
          console.log(JSON.stringify(error));
       }
@@ -56,9 +56,7 @@ export default function Login({ navigation }) {
                alignItems: 'center',
                padding: 10,
             }}
-            onPress={() => {
-               navigation.navigate('Search', accessToken);
-            }}>
+            onPress={() => navigation.navigate('Search', accessToken)}>
             <Text style={{ color: '#ffffff' }}>Login With Spotify</Text>
          </TouchableOpacity>
       </View>

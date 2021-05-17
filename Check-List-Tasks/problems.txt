@@ -1,4 +1,4 @@
 1 - A listagem não está mostrando todos os dos itens. [X]
 
-2 - Bug nas primeiras imagens. []
+2 - Bug nas primeiras imagens. [x]
 

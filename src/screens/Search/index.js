@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { View, FlatList, ActivityIndicator } from 'react-native';
 
 import api from '../../services/api';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 
 import { Container, ContentList } from './styles';
 
@@ -13,10 +13,12 @@ import { SearchBar } from '../../components/SearchBar';
 import { Content } from '../../components/Content/Content';
 
 export default function Search({ route }) {
+   // const route = useRoute();
    const accessToken = route.params;
 
    const [getArtists, setGetArtists] = useState([]);
    const [isLoading, setIsLoading] = useState(true);
+   const [filter, setFilter] = useState('');
 
    const navigation = useNavigation();
 
@@ -33,15 +35,16 @@ export default function Search({ route }) {
       getArtistsFromAPi();
    }, []);
 
-   function getArtistsFromAPi() {
-      api.get(`artists?ids=${ids}`, {
-         headers: { Authorization: `Bearer ${accessToken}` },
-      })
+   async function getArtistsFromAPi() {
+      await api
+         .get(`artists?ids=${ids}`, {
+            headers: {
+               Authorization: `Bearer ${accessToken}`,
+            },
+         })
          .then(async function (response) {
             setGetArtists(response.data);
             setIsLoading(false);
-
-            console.tron.log(getArtists);
          })
          .catch(function (error) {
             console.log(error);
@@ -65,11 +68,13 @@ export default function Search({ route }) {
       <Container>
          <Header title="Música" />
          <Tabs />
-         <SearchBar />
+         <SearchBar value={filter} onChangeText={value => setFilter(value)} />
          <ContentList>
             <View>
                <FlatList
-                  data={getArtists.artists}
+                  data={getArtists.artists.filter(item =>
+                     item.name.toLowerCase().includes(filter.toLowerCase()),
+                  )}
                   showsVerticalScrollIndicator={false}
                   keyExtractor={(item, index) => 'key' + index}
                   contentContainerStyle={{ justifyContent: 'space-between' }}
