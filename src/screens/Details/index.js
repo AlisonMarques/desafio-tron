@@ -1,36 +1,37 @@
 import React from 'react';
 
-import { View, Text, FlatList } from 'react-native';
-import { Container } from './styles';
+import { View, Text, FlatList, Image } from 'react-native';
+import { Container, NameArtist, ImageArtist, Content } from './styles';
 import { Header } from '../../components/Header/Header';
-import { Content } from '../../components/Content/Content';
 
 import { useNavigation, useRoute } from '@react-navigation/core';
 
 export default function Details() {
    const route = useRoute();
 
-   const { getArtists } = route.params;
-
-   const { name } = getArtists;
-
-   // const artists = { ...getArtists };
-   console.tron.log(getArtists);
-
-   // const selectArtist = getArtists.map(findOneArtist);
+   const [artists] = route.params;
 
    return (
       <Container>
          <Header title="Details" />
-         <FlatList
-            data={name}
-            styles={{ color: 'red' }}
-            keyExtractor={(item, index) => item.id}
-            renderItem={({ item }) => {
-               console.tron.log(...item);
-               console.log(item.name);
-            }}
-         />
+         <Content style={{ backgroundColor: '#222' }}>
+            <View style={{ flexDirection: 'row' }}>
+               <ImageArtist source={{ uri: artists.images[0].url }} />
+
+               <NameArtist>{artists.name}</NameArtist>
+            </View>
+            <View>
+               <Text style={{ color: 'white', textAlign: 'center' }}>
+                  Followers: {artists.followers.total}
+               </Text>
+               <Text style={{ color: 'white', textAlign: 'center' }}>
+                  Popularity: {artists.popularity}
+               </Text>
+               <Text style={{ color: 'white', textAlign: 'center' }}>
+                  Genres: {artists.genres}
+               </Text>
+            </View>
+         </Content>
       </Container>
    );
 }

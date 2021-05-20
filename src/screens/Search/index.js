@@ -22,8 +22,8 @@ export default function Search({ route }) {
 
    const navigation = useNavigation();
 
-   function handleArtistSelected() {
-      navigation.navigate('Details', { getArtists });
+   function handleArtistSelected(item) {
+      navigation.navigate('Details', [item]);
    }
 
    const ids =

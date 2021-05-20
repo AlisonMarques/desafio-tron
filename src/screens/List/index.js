@@ -14,17 +14,15 @@ import api from '../../services/api';
 export default function List() {
    const [getArtists, setGetArtists] = useState([]);
    const [isLoading, setIsLoading] = useState(true);
-   const [selectedId, setSelectedId] = useState(null);
 
    const navigation = useNavigation();
 
    const route = useRoute();
 
    const { accessToken } = route.params;
-   console.tron.log(accessToken);
 
-   function handleArtistSelected() {
-      navigation.navigate('Details', { getArtists });
+   function handleArtistSelected(item) {
+      navigation.navigate('Details', [item]);
    }
 
    const ids =
