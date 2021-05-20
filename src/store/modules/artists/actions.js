@@ -1,7 +1,7 @@
 import * as types from './types';
 import api from '~/services/api';
 import { authorize, refresh } from 'react-native-app-auth';
-import * as spotifyAuthConfig from '~/utils/spotifyAuthConfig'
+import {spotifyAuthConfig} from '../../../utils/spotifyAuthConfig'
 
 
 function setAccessTokenState(payload) {

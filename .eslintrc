@@ -1,0 +1,7 @@
+{
+   "plugins": ["react-hooks, react-native, react"],
+   "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-native/no-inline-styles": 0
+   }
+}

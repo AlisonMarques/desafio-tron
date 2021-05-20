@@ -22,7 +22,6 @@ export const Name = styled.Text`
    font-style: normal;
    font-weight: bold;
    display: flex;
-
    align-items: center;
    line-height: 20px;
    text-align: left;
