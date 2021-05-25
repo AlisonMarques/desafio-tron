@@ -7,7 +7,9 @@ import { Container, Lista, ContentList } from './styles';
 import { Tabs } from '../../components/Tabs/Tabs.js';
 import { Content } from '../../components/Content/Content.js';
 
-import { useNavigation, useRoute } from '@react-navigation/core';
+import { useSelector } from 'react-redux';
+
+import { useNavigation } from '@react-navigation/core';
 
 import api from '../../services/api';
 
@@ -16,10 +18,15 @@ export default function List() {
    const [isLoading, setIsLoading] = useState(true);
 
    const navigation = useNavigation();
+   const isRehydrated = useSelector(state => state._persist.rehydrated);
 
-   const route = useRoute();
+   const accessToken = useSelector(state => state.authReducer.accessToken);
 
-   const { accessToken } = route.params;
+   useEffect(() => {
+      if (isRehydrated && !accessToken) {
+         navigation.navigate('Login');
+      }
+   }, [isRehydrated, accessToken, navigation]);
 
    function handleArtistSelected(item) {
       navigation.navigate('Details', [item]);
@@ -35,11 +42,7 @@ export default function List() {
 
    async function getArtistsFromAPi() {
       await api
-         .get(`artists?ids=${ids}`, {
-            headers: {
-               Authorization: `Bearer ${accessToken}`,
-            },
-         })
+         .get(`artists?ids=${ids}`)
          .then(async function (response) {
             setGetArtists(response.data);
             setIsLoading(false);

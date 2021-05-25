@@ -12,11 +12,12 @@ import { Tabs } from '../../components/Tabs/Tabs.js';
 import { SearchBar } from '../../components/SearchBar';
 import { Content } from '../../components/Content/Content';
 
-export default function Search({ route }) {
+export default function Search() {
    // const route = useRoute();
-   const accessToken = route.params;
 
    const [getArtists, setGetArtists] = useState([]);
+   const [filterData, setFilterData] = useState([]);
+
    const [isLoading, setIsLoading] = useState(true);
    const [filter, setFilter] = useState('');
 
@@ -37,13 +38,10 @@ export default function Search({ route }) {
 
    async function getArtistsFromAPi() {
       await api
-         .get(`artists?ids=${ids}`, {
-            headers: {
-               Authorization: `Bearer ${accessToken}`,
-            },
-         })
+         .get(`search?q=Muse&type=artist&limit=10&offset=5`)
          .then(async function (response) {
             setGetArtists(response.data);
+            setFilterData(response.data);
             setIsLoading(false);
          })
          .catch(function (error) {
@@ -64,19 +62,36 @@ export default function Search({ route }) {
       );
    }
 
+   // const searchFilter = name => {
+   //    if (name) {
+   //       const filterData = getArtists.artists.items.filter(artist => {
+   //          const itemData = artist.name
+   //             ? artist.name.toUpperCase()
+   //             : ''.toUpperCase();
+
+   //          const nameData = name.toUpperCase();
+   //          return itemData.indexOf(nameData) > -1;
+   //       });
+
+   //       setFilterData(filterData);
+   //       setFilter(name);
+   //    } else {
+   //       setFilterData(getArtists);
+   //       setFilter(name);
+   //    }
+   // };
+
    return (
       <Container>
          <Header title="Música" />
          <Tabs />
-         <SearchBar value={filter} onChangeText={value => setFilter(value)} />
+         <SearchBar value={filter} onChangeText={name => searchFilter(name)} />
          <ContentList>
             <View>
                <FlatList
-                  data={getArtists.artists.filter(item =>
-                     item.name.toLowerCase().includes(filter.toLowerCase()),
-                  )}
+                  data={getArtists}
                   showsVerticalScrollIndicator={false}
-                  keyExtractor={(item, index) => 'key' + index}
+                  keyExtractor={(item, index) => index.toString()}
                   contentContainerStyle={{ justifyContent: 'space-between' }}
                   renderItem={({ item }) => (
                      <Content
