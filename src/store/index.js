@@ -9,17 +9,16 @@ const configPersist = {
    key: 'ApiSpotify',
    storage: AsyncStorage,
    version: 1,
+   whitelist: ['authReducer'],
 };
 
 const reactotron = __DEV__ && console.tron.createEnhancer();
 
-const composeEnhancers = __DEV__
-   ? compose(applyMiddleware(thunkMiddleware), reactotron)
-   : compose(applyMiddleware(thunkMiddleware));
+const composedEnhancer = compose(applyMiddleware(thunkMiddleware), reactotron);
 
 const persistedReducer = persistReducer(configPersist, rootReducer);
 
-const store = createStore(persistedReducer, composeEnhancers);
+const store = createStore(persistedReducer, composedEnhancer);
 
 const persistor = persistStore(store);
 
