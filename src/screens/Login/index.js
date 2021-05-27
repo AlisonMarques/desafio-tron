@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { authorize, refresh } from 'react-native-app-auth';
+import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../store/modules';
 
-import { View, TouchableOpacity, Text, Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
+
+import { Container, ButtonOpacity, Title } from './styles';
 
 export default function Login() {
    const navigation = useNavigation();
@@ -28,23 +28,16 @@ export default function Login() {
    }, [isRehydrated, accessToken, navigation]);
 
    return (
-      <View
-         style={{
-            backgroundColor: '#121212',
-            display: 'flex',
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-         }}>
-         <TouchableOpacity
+      <Container>
+         <ButtonOpacity
             style={{
                backgroundColor: '#222',
                alignItems: 'center',
                padding: 10,
             }}
             onPress={handleLogin}>
-            <Text style={{ color: '#ffffff' }}>Login With Spotify</Text>
-         </TouchableOpacity>
-      </View>
+            <Title>Login With Spotify</Title>
+         </ButtonOpacity>
+      </Container>
    );
 }

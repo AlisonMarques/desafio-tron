@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { View, FlatList, ActivityIndicator } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 
-import api from '../../services/api';
 import { useNavigation, useRoute } from '@react-navigation/core';
 
 import { Container, ContentList } from './styles';
@@ -11,15 +10,16 @@ import { Header } from '../../components/Header/Header';
 import { Tabs } from '../../components/Tabs/Tabs.js';
 import { SearchBar } from '../../components/SearchBar';
 import { Content } from '../../components/Content/Content';
+import { useDispatch, useSelector } from 'react-redux';
+import { artistActions } from '../../store/modules';
 
 export default function Search() {
-   // const route = useRoute();
-
-   const [getArtists, setGetArtists] = useState([]);
-   const [filterData, setFilterData] = useState([]);
+   // const [getArtists, setGetArtists] = useState([]);
 
    const [isLoading, setIsLoading] = useState(true);
-   const [filter, setFilter] = useState('');
+   const [filter, setFilter] = useState('Muse');
+   const [list, setList] = useState([]);
+   const [refreshing, setRefreshing] = useState(true);
 
    const navigation = useNavigation();
 
@@ -27,71 +27,61 @@ export default function Search() {
       navigation.navigate('Details', [item]);
    }
 
-   const ids =
-      '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6,0oSGxfWSnnOXhD2fKuz2Gy,3dBVyJ7JuOMt4GE9607Qin';
-
+   const dispatch = useDispatch();
+   const data = useSelector(state => state.artistReducer.artists);
+   const res = data;
    useEffect(() => {
       setIsLoading(true);
+      // handlerArtist();
+      dispatch(artistActions.getArtists(filter));
+      // getArtistsFromAPi();
+   }, [list, filter]);
+   // console.tron.log(res);
 
-      getArtistsFromAPi();
-   }, []);
-
-   async function getArtistsFromAPi() {
-      await api
-         .get(`search?q=Muse&type=artist&limit=10&offset=5`)
-         .then(async function (response) {
-            setGetArtists(response.data);
-            setFilterData(response.data);
-            setIsLoading(false);
-         })
-         .catch(function (error) {
-            console.log(error);
+   function handleFilterArtistByName(textoParaFiltrar) {
+      if (res && res.items) {
+         const result = res.items.filter(artist => {
+            return artist.name
+               .toLowerCase()
+               .includes(textoParaFiltrar.toLowerCase());
          });
+         setList(result);
+      }
+      setFilter(textoParaFiltrar);
    }
 
-   if (!getArtists) {
-      return null;
+   // const renderItem = ({ item }) => (
+   //
+   // );
+
+   function handlerArtist() {
+      dispatch(artistActions.getArtists(filter));
+      setIsLoading(false);
    }
 
-   if (isLoading) {
-      return (
-         <View
-            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <ActivityIndicator size="large" color="#5500dc" />
-         </View>
-      );
+   function handleRefresh() {
+      setRefreshing((refreshing = false), () => {
+         handlerArtist();
+      });
    }
-
-   // const searchFilter = name => {
-   //    if (name) {
-   //       const filterData = getArtists.artists.items.filter(artist => {
-   //          const itemData = artist.name
-   //             ? artist.name.toUpperCase()
-   //             : ''.toUpperCase();
-
-   //          const nameData = name.toUpperCase();
-   //          return itemData.indexOf(nameData) > -1;
-   //       });
-
-   //       setFilterData(filterData);
-   //       setFilter(name);
-   //    } else {
-   //       setFilterData(getArtists);
-   //       setFilter(name);
-   //    }
-   // };
+   console.tron.log(list);
 
    return (
       <Container>
          <Header title="Música" />
          <Tabs />
-         <SearchBar value={filter} onChangeText={name => searchFilter(name)} />
+         <SearchBar
+            value={filter}
+            onChangeText={name => handleFilterArtistByName(name)}
+            // onSubmitEditing={handlerArtist}
+         />
          <ContentList>
             <View>
                <FlatList
-                  data={getArtists}
+                  data={list}
+                  // extraData={refreshing}
                   showsVerticalScrollIndicator={false}
-                  keyExtractor={(item, index) => index.toString()}
+                  keyExtractor={(item, index) => String(item.id)}
                   contentContainerStyle={{ justifyContent: 'space-between' }}
                   renderItem={({ item }) => (
                      <Content
@@ -105,3 +95,28 @@ export default function Search() {
       </Container>
    );
 }
+
+// async function getArtistsFromAPi() {
+//    await api
+//       .get(`search?q=Muse&type=artist&limit=10&offset=5`)
+//       .then(async function (response) {
+//          setGetArtists(response.data);
+//          setIsLoading(false);
+//       })
+//       .catch(function (error) {
+//          console.log(error);
+//       });
+// }
+
+// if (!getArtists) {
+//    return null;
+// }
+
+// if (isLoading) {
+//    return (
+//       <View
+//          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//          <ActivityIndicator size="large" color="#5500dc" />
+//       </View>
+//    );
+// }

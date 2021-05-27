@@ -6,13 +6,17 @@ const INITIAL_STATE = {
 
 export default function artistReducer(state = INITIAL_STATE, action) {
    const { type, payload } = action;
-
    switch (type) {
       case types.SET_ARTISTS_RESULT:
          return {
-            ...state.artists,
             artists: payload.artists,
+            ...state.artists,
          };
+
+      // case types.PERSIST_REHYDRATE:
+      //    return {
+      //       artists: payload,
+      //    };
 
       default:
          return state;

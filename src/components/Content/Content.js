@@ -13,7 +13,10 @@ export function Content({ item, ...rest }) {
                marginBottom: 5,
             }}
             {...rest}>
-            <ImageArtist source={{ uri: item.images[0].url }} />
+            {item && item.images.length > 0 && item.images[0].url && (
+               <ImageArtist source={{ uri: item.images[0].url }} />
+            )}
+            {/* <ImageArtist source={{ uri: item.images[0].url }} /> */}
             <Name>{item.name}</Name>
          </RectButton>
       </Container>

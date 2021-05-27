@@ -4,10 +4,13 @@ import { Searchbar } from 'react-native-paper';
 
 import { Container, ContentList } from './styles';
 
-export function SearchBar({ onChangeText, value }) {
+export function SearchBar({ onChangeText, value, handle, ...rest }) {
    return (
       <Container>
          <Searchbar
+            {...rest}
+            onSubmitEditing={handle}
+            onIconPress={handle}
             placeholder="Find in artists"
             onChangeText={onChangeText}
             value={value}
