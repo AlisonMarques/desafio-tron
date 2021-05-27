@@ -1,2 +1,3 @@
 export const SET_ARTISTS_RESULT = 'SET_ARTISTS_RESULT';
 export const SET_ARTISTS_ERROR = 'SET_ARTISTS_ERROR';
+export const PERSIST_REHYDRATE = 'persist/REHYDRATE';
