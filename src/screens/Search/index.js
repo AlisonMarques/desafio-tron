@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { View, FlatList, Text } from 'react-native';
+import { View, FlatList, Text, ActivityIndicator } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/core';
 
@@ -20,6 +20,8 @@ export default function Search() {
    const [filter, setFilter] = useState('Muse');
    const [list, setList] = useState([]);
    const [refreshing, setRefreshing] = useState(true);
+   const [offset, setOffset] = useState(1);
+   const [isListEnd, setIsListEnd] = useState(false);
 
    const navigation = useNavigation();
 
@@ -29,18 +31,25 @@ export default function Search() {
 
    const dispatch = useDispatch();
    const data = useSelector(state => state.artistReducer.artists);
-   const res = data;
    useEffect(() => {
-      setIsLoading(true);
-      // handlerArtist();
-      dispatch(artistActions.getArtists(filter));
-      // getArtistsFromAPi();
+      // setIsLoading(true);
+      getData();
    }, [list, filter]);
-   // console.tron.log(res);
 
-   function handleFilterArtistByName(textoParaFiltrar) {
-      if (res && res.items) {
-         const result = res.items.filter(artist => {
+   const getData = () => {
+      dispatch(artistActions.getArtists(filter));
+      setList(data.items);
+   };
+
+   const handleOnEndReached = () => {
+      dispatch(artistActions.getArtists(filter));
+      setList([...list, data.items]);
+      setIsLoading(false);
+   };
+
+   async function handleFilterArtistByName(textoParaFiltrar) {
+      if (data && data.items) {
+         const result = await data.items.filter(artist => {
             return artist.name
                .toLowerCase()
                .includes(textoParaFiltrar.toLowerCase());
@@ -50,21 +59,20 @@ export default function Search() {
       setFilter(textoParaFiltrar);
    }
 
-   // const renderItem = ({ item }) => (
-   //
-   // );
-
-   function handlerArtist() {
-      dispatch(artistActions.getArtists(filter));
-      setIsLoading(false);
-   }
-
-   function handleRefresh() {
-      setRefreshing((refreshing = false), () => {
-         handlerArtist();
-      });
-   }
-   console.tron.log(list);
+   const renderFooter = () => {
+      return (
+         <View
+            style={{
+               justifyContent: 'center',
+               alignItems: 'center',
+               flexDirection: 'row',
+            }}>
+            {isLoading ? (
+               <ActivityIndicator color="white" style={{ margin: 15 }} />
+            ) : null}
+         </View>
+      );
+   };
 
    return (
       <Container>
@@ -73,13 +81,11 @@ export default function Search() {
          <SearchBar
             value={filter}
             onChangeText={name => handleFilterArtistByName(name)}
-            // onSubmitEditing={handlerArtist}
          />
          <ContentList>
             <View>
                <FlatList
                   data={list}
-                  // extraData={refreshing}
                   showsVerticalScrollIndicator={false}
                   keyExtractor={(item, index) => String(item.id)}
                   contentContainerStyle={{ justifyContent: 'space-between' }}
@@ -89,6 +95,9 @@ export default function Search() {
                         onPress={() => handleArtistSelected(item)}
                      />
                   )}
+                  ListFooterComponent={renderFooter}
+                  onEndReached={handleOnEndReached}
+                  onEndReachedThreshold={0.1}
                />
             </View>
          </ContentList>

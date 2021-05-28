@@ -77,7 +77,7 @@ export default function List() {
                         flexGrow: 1,
                         justifyContent: 'center',
                      }}
-                     // data={getArtists.artists}
+                     data={getArtists.artists}
                      styles={{ flex: 1, backgroundColor: 'red' }}
                      showsVerticalScrollIndicator={false}
                      keyExtractor={(item, index) => item.id}
