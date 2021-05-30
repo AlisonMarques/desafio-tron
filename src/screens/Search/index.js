@@ -31,6 +31,7 @@ export default function Search() {
 
    const dispatch = useDispatch();
    const data = useSelector(state => state.artistReducer.artists);
+
    useEffect(() => {
       // setIsLoading(true);
       getData();
