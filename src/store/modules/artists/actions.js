@@ -13,7 +13,6 @@ export const getArtists = name => async dispatch => {
       const { data } = await api.get(
          `search?q=${name}&type=artist&limit=10&offset=5`,
       );
-      console.tron.log(data === null);
       return dispatch(setArtistsState(data));
    } catch (err) {
       dispatch(types.SET_ARTISTS_ERROR);

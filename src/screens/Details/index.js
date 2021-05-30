@@ -1,10 +1,18 @@
 import React from 'react';
 
-import { View, Text, FlatList, Image } from 'react-native';
-import { Container, NameArtist, ImageArtist, Content } from './styles';
+import {
+   Container,
+   ContainerTouchable,
+   NameArtist,
+   ImageArtist,
+   Content,
+   Title,
+   Content_Drescriptions,
+   Drescriptions,
+} from './styles';
 import { Header } from '../../components/Header/Header';
 
-import { useNavigation, useRoute } from '@react-navigation/core';
+import { useRoute } from '@react-navigation/core';
 
 export default function Details() {
    const route = useRoute();
@@ -14,24 +22,30 @@ export default function Details() {
    return (
       <Container>
          <Header title="Details" />
-         <Content style={{ backgroundColor: '#222' }}>
-            <View style={{ flexDirection: 'row' }}>
-               <ImageArtist source={{ uri: artists.images[0].url }} />
+         <ContainerTouchable>
+            <Content>
+               <Title>
+                  <ImageArtist source={{ uri: artists.images[0].url }} />
 
-               <NameArtist>{artists.name}</NameArtist>
-            </View>
-            <View>
-               <Text style={{ color: 'white', textAlign: 'center' }}>
-                  Followers: {artists.followers.total}
-               </Text>
-               <Text style={{ color: 'white', textAlign: 'center' }}>
-                  Popularity: {artists.popularity}
-               </Text>
-               <Text style={{ color: 'white', textAlign: 'center' }}>
-                  Genres: {artists.genres}
-               </Text>
-            </View>
-         </Content>
+                  <NameArtist>{artists.name}</NameArtist>
+               </Title>
+               <Content_Drescriptions>
+                  <Drescriptions
+                     style={{
+                        color: 'white',
+                        textAlign: 'center',
+                     }}>
+                     Followers: {artists.followers.total}
+                  </Drescriptions>
+                  <Drescriptions>
+                     Popularity: {artists.popularity}
+                  </Drescriptions>
+                  <Drescriptions>
+                     Genres: {artists.genres.map(space => space + ', ')}
+                  </Drescriptions>
+               </Content_Drescriptions>
+            </Content>
+         </ContainerTouchable>
       </Container>
    );
 }

@@ -26,6 +26,9 @@ export default function List() {
       if (isRehydrated && !accessToken) {
          navigation.navigate('Login');
       }
+
+      setIsLoading(true);
+      getArtistsFromAPi();
    }, [isRehydrated, accessToken, navigation]);
 
    function handleArtistSelected(item) {
@@ -35,14 +38,10 @@ export default function List() {
    const ids =
       '2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6,0oSGxfWSnnOXhD2fKuz2Gy,3dBVyJ7JuOMt4GE9607Qin';
 
-   useEffect(() => {
-      setIsLoading(true);
-      getArtistsFromAPi();
-   }, []);
+   // useEffect(() => {}, []);
 
-   async function getArtistsFromAPi() {
-      await api
-         .get(`artists?ids=${ids}`)
+   function getArtistsFromAPi() {
+      api.get(`artists?ids=${ids}`)
          .then(async function (response) {
             setGetArtists(response.data);
             setIsLoading(false);
@@ -77,7 +76,7 @@ export default function List() {
                         flexGrow: 1,
                         justifyContent: 'center',
                      }}
-                     // data={getArtists.artists}
+                     data={getArtists.artists}
                      styles={{ flex: 1, backgroundColor: 'red' }}
                      showsVerticalScrollIndicator={false}
                      keyExtractor={(item, index) => item.id}

@@ -13,11 +13,13 @@ export default function authReducer(state = INITIAL_STATE, action) {
          return {
             accessToken: payload.accessToken,
          };
-      case types.PERSIST_REHYDRATE:
-         api.defaults.headers.Authorization = `Bearer ${payload.authReducer.accessToken}`;
-         return {
-            accessToken: payload.authReducer.accessToken,
-         };
+      // case types.PERSIST_REHYDRATE:
+      //    api.defaults.headers.Authorization = `Bearer ${payload.authReducer.accessToken}`;
+      //    return {
+      //       accessToken: payload.authReducer.accessToken
+      //          ? payload.authReducer.accessToken
+      //          : {},
+      //    };
 
       default:
          return state;
