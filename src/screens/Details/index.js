@@ -30,18 +30,14 @@ export default function Details() {
                   <NameArtist>{artists.name}</NameArtist>
                </Title>
                <Content_Drescriptions>
-                  <Drescriptions
-                     style={{
-                        color: 'white',
-                        textAlign: 'center',
-                     }}>
+                  <Drescriptions>
                      Followers: {artists.followers.total}
                   </Drescriptions>
                   <Drescriptions>
                      Popularity: {artists.popularity}
                   </Drescriptions>
                   <Drescriptions>
-                     Genres: {artists.genres.map(space => space + ', ')}
+                     Genres: {artists.genres.map(space => space + ' ')}
                   </Drescriptions>
                </Content_Drescriptions>
             </Content>
