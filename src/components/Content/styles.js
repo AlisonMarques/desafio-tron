@@ -6,15 +6,6 @@ export const Container = styled.View`
    padding-top: 8px;
 `;
 
-// export const List = styled.View`
-//    flex: 1;
-//    display: flex;
-//    justify-content: space-between;
-
-//    position: relative;
-//    width: 100%;
-// `;
-
 export const Name = styled.Text`
    padding: 20px;
    color: #ffffff;
