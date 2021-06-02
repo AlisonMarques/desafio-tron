@@ -21,15 +21,3 @@ export const Title = styled.Text`
    font-size: 30px;
    line-height: 38px;
 `;
-
-// export const Text = styled.Text`
-//    font-style: normal;
-//    font-weight: bold;
-//    font-size: 30px;
-//    line-height: 38px;
-
-//    display: flex;
-//    align-items: center;
-//    text-align: center;
-//    color: #ffffff;
-// `;
