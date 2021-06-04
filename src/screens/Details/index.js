@@ -9,16 +9,11 @@ import {
    Title,
    Content_Drescriptions,
    Drescriptions,
+   ContentModal,
+   ContainerTouchableHight,
 } from './styles';
 
-import {
-   Modal,
-   TextInput,
-   Text,
-   View,
-   TouchableOpacity,
-   TouchableHighlight,
-} from 'react-native';
+import { Modal, TextInput, Text } from 'react-native';
 
 import { Header } from '../../components/Header/Header';
 
@@ -28,12 +23,12 @@ export default function Details() {
    const [isModalVisible, setModalVisible] = useState(false);
    const [textInput, setTextInput] = useState('');
    const [editItem, setEditItem] = useState(0);
-   const [editedItem, setEditedItem] = useState([]);
+   const [editedItem, setEditedItem] = useState({});
 
    const route = useRoute();
 
    const [artists] = route.params;
-   console.tron.log(artists);
+   console.log(artists);
 
    const genres = artists.genres.reduce((acc, item, index, array) => {
       if (index === array.length - 1) {
@@ -55,14 +50,8 @@ export default function Details() {
       setEditItem(item);
    }
 
-   // const teste = artists.map(artist => {
-   //    artist.name;
-   // });
-
-   // console.log(teste);
-
    async function handleEditedItem(editedItem) {
-      const newData = await artists.filter(artist => {
+      const newData = await artists.map(artist => {
          if (artist.id === editedItem) {
             artist.name = textInput;
             return artist;
@@ -73,6 +62,7 @@ export default function Details() {
       setEditedItem(newData);
    }
 
+   console.log(editedItem);
    return (
       <Container>
          <Header title="Details" />
@@ -102,23 +92,27 @@ export default function Details() {
                animationType="fade"
                visible={isModalVisible}
                onRequestClose={() => handleModalVisible(false)}>
-               <View>
-                  <Text>Teste : {textInput} </Text>
+               <ContentModal>
+                  <Header title="Edit" />
+                  <Text style={{ color: '#ffffff' }}>
+                     Nome : {textInput} {'\n'} Id: {editItem}{' '}
+                  </Text>
                   <TextInput
+                     style={{ color: '#ffffff' }}
                      editable={true}
                      multiline={false}
                      maxlength={200}
                      defaultValue={textInput}
                      onChangeText={text => setTextInput(text)}
                   />
-                  <TouchableHighlight
+                  <ContainerTouchableHight
                      onPress={() => {
                         handleEditedItem(editedItem);
                         handleModalVisible(false);
                      }}>
-                     <Text>save</Text>
-                  </TouchableHighlight>
-               </View>
+                     <Text style={{ color: '#ffffff' }}>save</Text>
+                  </ContainerTouchableHight>
+               </ContentModal>
             </Modal>
          </ContainerTouchable>
       </Container>
