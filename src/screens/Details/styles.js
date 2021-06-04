@@ -10,8 +10,20 @@ export const ContainerTouchable = styled.TouchableOpacity`
    justify-content: center;
 `;
 
+export const ContainerTouchableHight = styled.TouchableHighlight`
+   justify-content: center;
+`;
+
 export const Content = styled.View`
    height: 50%;
+   justify-content: center;
+   align-items: center;
+   background-color: #222;
+   margin: 20px;
+`;
+
+export const ContentModal = styled.View`
+   flex: 1;
    justify-content: center;
    align-items: center;
    background-color: #222;
