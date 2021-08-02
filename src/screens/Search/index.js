@@ -14,8 +14,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { artistActions } from '../../store/modules';
 
 export default function Search() {
-   // const [getArtists, setGetArtists] = useState([]);
-
    const [isLoading, setIsLoading] = useState(true);
    const [filter, setFilter] = useState('Muse');
    const [list, setList] = useState([]);
@@ -106,27 +104,4 @@ export default function Search() {
    );
 }
 
-// async function getArtistsFromAPi() {
-//    await api
-//       .get(`search?q=Muse&type=artist&limit=10&offset=5`)
-//       .then(async function (response) {
-//          setGetArtists(response.data);
-//          setIsLoading(false);
-//       })
-//       .catch(function (error) {
-//          console.log(error);
-//       });
-// }
 
-// if (!getArtists) {
-//    return null;
-// }
-
-// if (isLoading) {
-//    return (
-//       <View
-//          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//          <ActivityIndicator size="large" color="#5500dc" />
-//       </View>
-//    );
-// }

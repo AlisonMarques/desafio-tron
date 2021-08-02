@@ -28,7 +28,6 @@ export default function Details() {
    const route = useRoute();
 
    const [artists] = route.params;
-   console.log(artists);
 
    const genres = artists.genres.reduce((acc, item, index, array) => {
       if (index === array.length - 1) {
@@ -62,7 +61,6 @@ export default function Details() {
       setEditedItem(newData);
    }
 
-   console.log(editedItem);
    return (
       <Container>
          <Header title="Details" />
